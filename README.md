@@ -15,3 +15,4 @@ A good friend of mine reads quite a bit of books and he was looking for a way to
 - [ ] Clicking on a star will favorite the book and save to local storage
 - [ ] Think of a more interesting layout
 - [ ] Allow the user to scan the barcode to search
+- [ ] Sanitize HTML

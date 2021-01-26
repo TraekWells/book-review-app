@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Search from "../views/Search.vue";
 import SavedBooks from "../views/SavedBooks.vue";
 import Library from "../views/Library.vue";
+import BookDetails from "../views/BookDetails.vue";
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes = [
     path: "/library",
     name: "Library",
     component: Library,
+  },
+  {
+    path: "/books/:title",
+    name: "BookDetails",
+    component: BookDetails,
   },
 ];
 

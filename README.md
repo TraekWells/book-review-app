@@ -1,25 +1,17 @@
-# book-review-app
+# Book Review App
 
-## Project setup
-```
-npm install
-```
+A good friend of mine reads quite a bit of books and he was looking for a way to search for, and review the books he's read. It was a good opportunity to try out Tailwind CSS for the first time along with using VueJS to build something.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Technology Used
 
-### Compiles and minifies for production
-```
-npm run build
-```
+- Google Books API
+- VueJS
+- Vue Router
+- Tailwind CSS
+- Japanese Lofi HipHop
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Todos
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-# book-review-app
+- [ ] Clicking on a star will favorite the book and save to local storage
+- [ ] Think of a more interesting layout
+- [ ] Allow the user to scan the barcode to search

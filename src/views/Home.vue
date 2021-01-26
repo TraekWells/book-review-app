@@ -7,7 +7,7 @@
       <p class="text-xl mb-10">I'll think of a better title later</p>
       <Search @books="sendResults" />
     </article>
-    <SearchResults :books="books" />
+    <SearchResults v-if="books" :books="books" />
   </main>
 </template>
 

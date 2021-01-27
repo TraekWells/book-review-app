@@ -18,7 +18,7 @@
         {{ this.stripContent(book.searchInfo.textSnippet) }}
       </p>
       <router-link
-        :to="title"
+        :to="{ name: 'BookDetails', params: { title: title } }"
         class="learn-more flex text-blue-600 hover:text-blue-800"
         >Learn More <ArrowRightIcon class="ml-2 transition-all"
       /></router-link>

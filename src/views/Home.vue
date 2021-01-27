@@ -1,10 +1,10 @@
 <template>
   <div>
-    <header class="bg-gray-50 mb-20 flex items-center">
-      <div class="p-16 w-1/2">
-        <div class="container mx-auto">
+    <header class="bg-gray-50 mb-20 py-12">
+      <div class="container flex items-center justify-between">
+        <div class="w-2/3 max-w-2xl">
           <h1 class="text-5xl mb-5">Logbook</h1>
-          <p class="text-lg mb-10">
+          <p class="text-xl leading-relaxed mb-10">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque
             temporibus iste ut a facere, voluptatem dolorum, repudiandae maxime
             doloremque non, fuga nobis error blanditiis omnis impedit hic porro
@@ -12,28 +12,31 @@
           </p>
           <SearchForm @books="sendResults" />
         </div>
-      </div>
-      <div class="w-1/2">
-        <img
-          src="@/assets/images/hero-image.jpg"
-          alt=""
-          class="object-cover h-full"
-        />
+        <div class="w-1/3">
+          <img
+            src="@/assets/images/hero-image.jpg"
+            alt=""
+            class="object-cover h-full"
+          />
+        </div>
       </div>
     </header>
     <main class="container px-20 mx-auto">
-      <!-- <div class="container px-20 mx-auto">
-        <h2>Recommended For You</h2>
-        <BookCard
-          :book="books"
-          v-for="(book, index) in recommendedBooks"
-          :key="index"
-        />
-      </div> -->
-      <div class="grid grid-cols-2 gap-12">
-        <template v-for="(book, index) in searchResults">
-          <BookCard :book="book" :key="index" />
-        </template>
+      <div v-if="!searchResults" class="recommended">
+        <h2 class="text-">Recommended For You</h2>
+        <div class="grid grid-cols-2 gap-12">
+          <template v-for="(book, index) in recommendedBooks">
+            <BookCard :book="book" :key="index" />
+          </template>
+        </div>
+      </div>
+      <div v-else class="search-results">
+        <h2>Search Results</h2>
+        <div class="grid grid-cols-2 gap-12">
+          <template v-for="(book, index) in searchResults">
+            <BookCard :book="book" :key="index" />
+          </template>
+        </div>
       </div>
     </main>
   </div>

@@ -1,5 +1,21 @@
 <template>
-  <h1>My Library</h1>
+  <header class="bg-gray-50 mb-20 py-12">
+    <div class="container flex items-center justify-between">
+      <div class="w-2/3 max-w-2xl">
+        <h1 class="text-5xl mb-5">My Library</h1>
+        <p class="text-xl leading-relaxed mb-10">
+          A running list of the books I've read.
+        </p>
+      </div>
+      <div class="w-1/3">
+        <img
+          src="@/assets/images/hero-image.jpg"
+          alt=""
+          class="object-cover h-full"
+        />
+      </div>
+    </div>
+  </header>
 </template>
 
 <script>

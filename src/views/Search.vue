@@ -1,13 +1,32 @@
 <template>
-  <main>
-    <article
-      class="bg-indigo-100 py-24 text-white flex flex-col justify-center items-center"
-    >
-      <h1 class="text-4xl mb-4 font-bold">Book Review App</h1>
-      <p class="text-xl mb-10">I'll think of a better title later</p>
-      <SearchForm @books="sendResults" />
-    </article>
-  </main>
+  <div>
+    <header class="bg-gray-50 mb-20">
+      <div class="container flex items-center justify-center py-20">
+        <div class="max-w-2xl text-center flex flex-col items-center">
+          <h1 class="text-5xl mb-5">Search</h1>
+          <p class="text-xl leading-relaxed mb-10">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque
+            temporibus iste ut a facere, voluptatem dolorum, repudiandae maxime
+            doloremque non, fuga nobis error blanditiis omnis impedit hic porro
+            neque sunt.
+          </p>
+          <SearchForm @books="sendResults" />
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="container px-20">
+        <div v-if="searchResults" class="search-results">
+          <h2>Search Results</h2>
+          <div class="grid grid-cols-2 gap-12">
+            <template v-for="(book, index) in searchResults">
+              <BookCard :book="book" :key="index" />
+            </template>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 </template>
 
 <script>
@@ -20,12 +39,12 @@ export default {
   },
   data() {
     return {
-      books: null,
+      searchResults: null,
     };
   },
   methods: {
     sendResults(payload) {
-      this.books = payload;
+      this.searchResults = payload;
     },
   },
 };

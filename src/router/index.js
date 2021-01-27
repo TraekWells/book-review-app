@@ -33,6 +33,7 @@ const routes = [
     path: "/books/:title",
     name: "BookDetails",
     component: BookDetails,
+    props: { book: true },
   },
 ];
 

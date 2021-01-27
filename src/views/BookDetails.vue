@@ -1,12 +1,14 @@
 <template>
   <article>
-    <h1>Book Details</h1>
-    <p>{{ $route.params.title }}</p>
+    <h1>{{ this.$route.params.book.volumeInfo.title }}</h1>
+    <p>{{ this.$route.params.book.volumeInfo.description }}</p>
   </article>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["book"],
+};
 </script>
 
 <style></style>

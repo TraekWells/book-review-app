@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="bg-gray-50 mb-20 py-12">
-      <div class="container flex items-center justify-between">
+      <div class="container flex justify-between">
         <div class="w-2/3 max-w-2xl">
           <h1 class="text-5xl mb-5">Logbook</h1>
           <p class="text-xl leading-relaxed mb-10">
@@ -16,7 +16,7 @@
           <img
             src="@/assets/images/hero-image.jpg"
             alt=""
-            class="object-cover h-full"
+            class="object-cover h-full rounded-md"
           />
         </div>
       </div>

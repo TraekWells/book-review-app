@@ -1,6 +1,6 @@
 <template>
   <footer class="py-10">
-    <div class="container mx-auto">
+    <div class="container mx-auto text-center">
       <p>Made by Traek Wells</p>
     </div>
   </footer>

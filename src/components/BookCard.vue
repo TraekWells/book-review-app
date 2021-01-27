@@ -8,17 +8,19 @@
       class="image rounded-md mr-10 block self-start"
     />
     <div class="flex flex-col">
-      <p class="mb-2 text-gray-600" v-if="book.volumeInfo.authors">
+      <p class="mb- text-gray-600 uppercase" v-if="book.volumeInfo.authors">
         {{ book.volumeInfo.authors[0] }}
       </p>
-      <h3 class="text-2xl mb-3 text-green-700 font-bold">
+      <h3 class="text-2xl mb-4 font-bold">
         {{ book.volumeInfo.title }}
       </h3>
-      <p v-if="book.searchInfo" class="flex-grow">
+      <p v-if="book.searchInfo" class="flex-grow text-md">
         {{ this.stripContent(book.searchInfo.textSnippet) }}
       </p>
-      <router-link to="#" class="learn-more flex"
-        >Learn More <ArrowRightIcon class="ml-2"
+      <router-link
+        :to="title"
+        class="learn-more flex text-blue-600 hover:text-blue-800"
+        >Learn More <ArrowRightIcon class="ml-2 transition-all"
       /></router-link>
     </div>
   </article>
@@ -26,6 +28,7 @@
 
 <script>
 import { BookmarkIcon, ArrowRightIcon } from "vue-feather-icons";
+import slugify from "slugify";
 
 export default {
   name: "BookCard",
@@ -36,7 +39,7 @@ export default {
   },
   data() {
     return {
-      strippedtext: null,
+      title: "",
     };
   },
   components: {
@@ -49,16 +52,18 @@ export default {
       return text.replace(regex, "");
     },
   },
+  created() {
+    this.title = slugify(this.book.volumeInfo.title, { lower: true });
+  },
 };
 </script>
 
 <style>
-.svg:hover {
-  color: rgba(251, 191, 36, var(--tw-text-opacity));
-  fill: rgba(251, 191, 36, var(--tw-text-opacity));
-}
-
 .image {
   max-width: 12rem;
+}
+
+.learn-more:hover svg {
+  transform: translateX(1rem);
 }
 </style>

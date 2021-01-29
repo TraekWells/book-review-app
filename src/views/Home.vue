@@ -1,18 +1,18 @@
 <template>
   <div>
-    <header class="bg-gray-800 text-white mb-20 py-16 relative">
-      <div class="container flex flex-col items-center">
+    <header class="bg-gray-800 text-white mb-20 px-6 md:px-0 py-16 relative">
+      <div class="container sm:flex flex-col items-center">
         <h1 class="text-5xl mb-5">Logbook</h1>
-        <p class="text-xl max-w-2xl leading-relaxed mb-10 text-center">
+        <p class="text-xl max-w-2xl leading-relaxed mb-10 md:text-center">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque
           temporibus iste ut a facere, voluptatem dolorum, repudiandae maxime
           doloremque non, fuga nobis error blanditiis omnis impedit hic porro
           neque sunt.
         </p>
-        <SearchForm @books="sendResults" class="absolute -bottom-7" />
+        <SearchForm @books="sendResults" class="md:absolute md:-bottom-7" />
       </div>
     </header>
-    <main class="container px-20 mx-auto">
+    <main class="container px-7 md:px-20 mx-auto">
       <div v-if="!searchResults" class="recommended">
         <h2 class="text-center mb-10">Recommended For You</h2>
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-12">

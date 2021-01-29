@@ -15,7 +15,7 @@
       </div>
     </header>
     <main>
-      <div class="container px-20">
+      <div class="container px-7 md:px-20">
         <div v-if="searchResults" class="search-results">
           <h2>Search Results</h2>
           <div class="grid grid-cols-1 xl:grid-cols-2 gap-12">

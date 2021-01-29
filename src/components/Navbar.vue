@@ -1,7 +1,9 @@
 <template>
   <nav class="py-4 shadow-md">
-    <div class="container mx-auto flex items-center justify-between">
-      <ul class="flex text-gray-700">
+    <div
+      class="container mx-auto flex items-center justify-center md:justify-between flex-wrap"
+    >
+      <ul class="flex text-gray-700 mb-5 md:mb-0">
         <li>
           <router-link :to="{ name: 'Home' }" class="p-4">Home</router-link>
         </li>

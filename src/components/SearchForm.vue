@@ -1,14 +1,14 @@
 <template>
   <div class="search flex">
-    <form @submit.prevent="handleForm">
+    <form @submit.prevent="handleForm" class="flex flex-col md:flex-row w-full">
       <input
         type="text"
-        class="p-4 text-gray-700 text-xl shadow-md rounded-l-md focus:ring-4"
+        class="w-full p-3 md:p-4 text-gray-700 text-lg md:text-xl shadow-md rounded-t-md md:rounded-r-none md:rounded-l-md focus:ring-4"
         v-model="searchQuery"
         placeholder="Search for a book"
       />
       <button
-        class="bg-green-700 text-white py-4 text-xl shadow-md px-8 rounded-r-md hover:bg-green-800"
+        class="bg-green-700 text-white py-3 md:py-4 text-lg md:text-xl shadow-md px-6 md:px-8 rounded-b-md md:rounded-l-none md:rounded-r-md hover:bg-green-800"
       >
         Search
       </button>

@@ -1,6 +1,6 @@
 <template>
   <article
-    class="bg-gray-50 rounded-md p-7 flex relative"
+    class="bg-gray-50 rounded-md p-7 md:flex relative"
     data-aos="fade-up"
     data-aos-offset="150"
     data-aos-delay="100"
@@ -12,7 +12,7 @@
       v-if="book.volumeInfo.imageLinks"
       :src="book.volumeInfo.imageLinks.thumbnail"
       alt=""
-      class="image rounded-md mr-10 block self-start"
+      class="image rounded-md mb-4 md:mb-0 md:mr-10 block self-start"
     />
     <div class="flex flex-col">
       <p class="text-gray-600 uppercase" v-if="book.volumeInfo.authors">
@@ -21,7 +21,7 @@
       <h3 class="text-2xl mb-4 font-bold">
         {{ book.volumeInfo.title }}
       </h3>
-      <p v-if="book.searchInfo" class="flex-grow text-md">
+      <p v-if="book.searchInfo" class="flex-grow text-md mb-4">
         {{ this.stripContent(book.searchInfo.textSnippet) }}
       </p>
       <router-link

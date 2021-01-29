@@ -1,19 +1,13 @@
 <template>
-  <header class="bg-gray-50 mb-20 py-12">
-    <div class="container flex justify-between">
-      <div class="w-2/3 max-w-2xl">
-        <h1 class="text-5xl mb-5">Saved Books</h1>
-        <p class="text-xl leading-relaxed mb-10">
-          A list of books I want to read later.
-        </p>
-      </div>
-      <div class="w-1/3">
-        <img
-          src="@/assets/images/hero-image.jpg"
-          alt=""
-          class="object-cover h-full rounded-md"
-        />
-      </div>
+  <header class="bg-gray-800 text-white mb-20 py-16">
+    <div class="container flex flex-col items-center">
+      <h1 class="text-5xl mb-5">Saved Books</h1>
+      <p class="text-xl max-w-2xl leading-relaxed mb-10 text-center">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque
+        temporibus iste ut a facere, voluptatem dolorum, repudiandae maxime
+        doloremque non, fuga nobis error blanditiis omnis impedit hic porro
+        neque sunt.
+      </p>
     </div>
   </header>
 </template>

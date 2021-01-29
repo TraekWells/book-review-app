@@ -1,6 +1,13 @@
 <template>
-  <article class="bg-gray-50 rounded-md p-7 flex relative">
-    <BookmarkIcon class="favorite-icon absolute top-5 right-5 w-5" />
+  <article
+    class="bg-gray-50 rounded-md p-7 flex relative"
+    data-aos="fade-up"
+    data-aos-offset="150"
+    data-aos-delay="100"
+  >
+    <BookmarkIcon
+      class="favorite-icon absolute top-5 right-5 w-5 cursor-pointer transition-colors hover:text-blue-700"
+    />
     <img
       v-if="book.volumeInfo.imageLinks"
       :src="book.volumeInfo.imageLinks.thumbnail"
@@ -8,7 +15,7 @@
       class="image rounded-md mr-10 block self-start"
     />
     <div class="flex flex-col">
-      <p class="mb- text-gray-600 uppercase" v-if="book.volumeInfo.authors">
+      <p class="text-gray-600 uppercase" v-if="book.volumeInfo.authors">
         {{ book.volumeInfo.authors[0] }}
       </p>
       <h3 class="text-2xl mb-4 font-bold">
@@ -29,6 +36,8 @@
 <script>
 import { BookmarkIcon, ArrowRightIcon } from "vue-feather-icons";
 import slugify from "slugify";
+import aos from "aos";
+import "aos/dist/aos.css";
 
 export default {
   name: "BookCard",
@@ -54,6 +63,7 @@ export default {
   },
   created() {
     this.title = slugify(this.book.volumeInfo.title, { lower: true });
+    aos.init();
   },
 };
 </script>

@@ -3,12 +3,12 @@
     <form @submit.prevent="handleForm">
       <input
         type="text"
-        class="p-3 text-gray-700 shadow-md rounded-l-md focus:ring-4"
+        class="p-4 text-gray-700 text-xl shadow-md rounded-l-md focus:ring-4"
         v-model="searchQuery"
         placeholder="Search for a book"
       />
       <button
-        class="bg-green-700 text-white py-3 shadow-md px-8 rounded-r-md hover:bg-green-800"
+        class="bg-green-700 text-white py-4 text-xl shadow-md px-8 rounded-r-md hover:bg-green-800"
       >
         Search
       </button>
@@ -30,7 +30,7 @@ export default {
   methods: {
     handleForm() {
       const searchQuery = this.searchQuery;
-      const api = `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}&langRestrict=en&key=${process.env.VUE_APP_API_KEY}`;
+      const api = `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}&langRestrict=en&maxResults=20&key=${process.env.VUE_APP_API_KEY}`;
 
       axios
         .get(api)

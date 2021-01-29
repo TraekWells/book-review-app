@@ -18,7 +18,7 @@
       </ul>
       <router-link
         :to="{ name: 'Search' }"
-        class="text-gray-700 p-2 border-gray-700 border bw rounded-md"
+        class="text-gray-700 py-2 px-4 border-gray-700 hover:text-white hover:border-transparent hover:bg-gray-700 transition-colors border bw rounded-md"
         >Search for Books</router-link
       >
     </div>

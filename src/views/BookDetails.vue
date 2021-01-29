@@ -1,44 +1,75 @@
 <template>
   <div class="book-details">
-    <header class="bg-gray-50 mb-20 py-12">
-      <div class="container flex justify-between">
-        <div class="w-2/3 max-w-2xl">
-          <p>{{ this.$route.params.book.volumeInfo.authors[0] }}</p>
-          <h1 class="text-5xl mb-5">
-            {{ this.$route.params.book.volumeInfo.title }}
-          </h1>
-          <p class="text-lg leading-relaxed mb-10">
-            {{ this.$route.params.book.volumeInfo.description }}
-          </p>
-        </div>
+    <header class="bg-gray-700 text-white mb-20 py-20 relative">
+      <div class="container flex">
         <div
-          v-if="this.$route.params.book.volumeInfo.imageLinks.thumbnail"
-          class="w-1/3"
+          v-if="info.volumeInfo.imageLinks.thumbnail"
+          class="book-container w-auto mr-16"
         >
           <img
-            :src="this.$route.params.book.volumeInfo.imageLinks.thumbnail"
+            :src="info.volumeInfo.imageLinks.thumbnail"
             alt=""
-            class="object-cover h-full rounded-md"
+            class="object-cover rounded-md h-96"
           />
         </div>
-      </div>
-      <div class="container buttons flex">
-        <a href="#" class="py-4 px-7 rounded-md bg-gray-600 text-white mr-6"
-          >Mark as Read</a
-        >
-        <a href="#" class="py-4 px-7 rounded-md border border-gray-600"
-          >Save for Later</a
-        >
+        <div class="w-auto max-w-2xl">
+          <p class="text-gray-300 uppercase">
+            {{ info.volumeInfo.authors[0] }}
+          </p>
+          <h1 class="text-5xl mb-5">
+            {{ info.volumeInfo.title }}
+          </h1>
+          <p v-if="info.searchInfo" class="flex-grow text-md mb-10">
+            {{ info.searchInfo.textSnippet }}
+          </p>
+
+          <div class="buttons flex">
+            <a
+              href="#"
+              class="py-4 px-7 rounded-md transition-colors bg-gray-600 hover:bg-gray-800 text-white mr-6"
+              >Mark as Read</a
+            >
+            <a
+              href="#"
+              class="py-4 px-7 rounded-md transition-colors border hover:border-transparent hover:bg-gray-800 hover:text-white border-gray-600"
+              >Save for Later</a
+            >
+          </div>
+        </div>
       </div>
     </header>
-    <main class="py-20"></main>
+    <main class="py-12">
+      <div class="container flex">
+        <article class="description mr-14 w-1/2">
+          <h2>Description</h2>
+          <p class="text-lg leading-relaxed mb-10">
+            {{ info.volumeInfo.description }}
+          </p>
+        </article>
+        <article class="review bg-gray-100 p-6 rounded-md w-1/2">
+          <h2>My Review</h2>
+          <p class="text-lg leading-relaxed mb-10">
+            Review goes here
+          </p>
+        </article>
+      </div>
+    </main>
   </div>
 </template>
 
 <script>
 export default {
   props: ["book"],
+  data() {
+    return {
+      info: this.$route.params.book,
+    };
+  },
 };
 </script>
 
-<style></style>
+<style>
+.book-container {
+  margin-bottom: -12%;
+}
+</style>

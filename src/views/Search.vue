@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="bg-gray-50 mb-20">
+    <header class="bg-gray-800 text-white mb-20">
       <div class="container flex items-center justify-center py-20">
         <div class="max-w-2xl text-center flex flex-col items-center">
           <h1 class="text-5xl mb-5">Search</h1>
@@ -18,7 +18,7 @@
       <div class="container px-20">
         <div v-if="searchResults" class="search-results">
           <h2>Search Results</h2>
-          <div class="grid grid-cols-2 gap-12">
+          <div class="grid grid-cols-1 xl:grid-cols-2 gap-12">
             <template v-for="(book, index) in searchResults">
               <BookCard :book="book" :key="index" />
             </template>
@@ -31,11 +31,13 @@
 
 <script>
 import SearchForm from "@/components/SearchForm";
+import BookCard from "@/components/BookCard";
 
 export default {
   name: "Home",
   components: {
     SearchForm,
+    BookCard,
   },
   data() {
     return {

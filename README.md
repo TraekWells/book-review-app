@@ -5,6 +5,7 @@ A good friend of mine reads quite a bit of books and he was looking for a way to
 ## Technology Used
 
 - Google Books API
+- Google Firebase
 - VueJS
 - Vue Router
 - Tailwind CSS

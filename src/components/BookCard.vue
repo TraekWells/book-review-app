@@ -22,10 +22,17 @@
         {{ book.volumeInfo.title }}
       </h3>
       <p v-if="book.searchInfo" class="flex-grow text-md mb-4">
-        {{ this.stripContent(book.searchInfo.textSnippet) }}
+        {{
+          this.stripContent(
+            this.replaceEntity(this.book.searchInfo.textSnippet)
+          )
+        }}
       </p>
       <router-link
-        :to="{ name: 'BookDetails', params: { title: title, book: book } }"
+        :to="{
+          name: 'BookDetails',
+          params: { title: title, snippet: snippet, book: book },
+        }"
         class="learn-more flex text-blue-600 hover:text-blue-800"
         >Learn More <ArrowRightIcon class="ml-2 transition-all"
       /></router-link>
@@ -49,6 +56,7 @@ export default {
   data() {
     return {
       title: "",
+      snippet: "",
     };
   },
   components: {
@@ -58,11 +66,17 @@ export default {
   methods: {
     stripContent(text) {
       let regex = /(<([^>]+)>)/gi;
-      return text.replace(regex, "");
+      return text.replaceAll(regex, "");
+    },
+    replaceEntity(str) {
+      return str.replaceAll("&#39;", "'");
     },
   },
   created() {
     this.title = slugify(this.book.volumeInfo.title, { lower: true });
+    this.snippet = this.stripContent(
+      this.replaceEntity(this.book.searchInfo.textSnippet)
+    );
     aos.init();
   },
 };

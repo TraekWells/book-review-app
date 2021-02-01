@@ -5,10 +5,16 @@ import Search from "../views/Search.vue";
 import SavedBooks from "../views/SavedBooks.vue";
 import Library from "../views/Library.vue";
 import BookDetails from "../views/BookDetails.vue";
+import SignUp from "../views/SignUp.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: "/sign-up",
+    name: "SignUp",
+    component: SignUp,
+  },
   {
     path: "/",
     name: "Home",

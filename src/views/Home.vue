@@ -47,6 +47,7 @@ export default {
     return {
       searchResults: null,
       recommendedBooks: [],
+      interests: null,
     };
   },
   methods: {
@@ -55,7 +56,7 @@ export default {
     },
   },
   mounted() {
-    const api = `https://www.googleapis.com/books/v1/volumes?q=samurai&langRestrict=en&maxResults=20&key=${process.env.VUE_APP_API_KEY}`;
+    const api = `https://www.googleapis.com/books/v1/volumes?q=${this.interests}&langRestrict=en&maxResults=20&key=${process.env.VUE_APP_API_KEY}`;
 
     axios
       .get(api)

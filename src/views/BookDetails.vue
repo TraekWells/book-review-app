@@ -1,6 +1,6 @@
 <template>
   <div class="book-details">
-    <header class="bg-gray-700 text-white mb-20 py-20 relative">
+    <header class="bg-gray-800 text-white mb-20 py-20 relative">
       <div class="container flex">
         <div
           v-if="info.volumeInfo.imageLinks.thumbnail"
@@ -9,29 +9,29 @@
           <img
             :src="info.volumeInfo.imageLinks.thumbnail"
             alt=""
-            class="object-cover rounded-md h-96"
+            class="book-image object-cover rounded-md mr-8"
           />
         </div>
         <div class="w-auto max-w-2xl">
-          <p class="text-gray-300 uppercase">
+          <p class="text-green-300 font-bold uppercase mb-3">
             {{ info.volumeInfo.authors[0] }}
           </p>
           <h1 class="text-5xl mb-5">
             {{ info.volumeInfo.title }}
           </h1>
           <p v-if="info.searchInfo" class="flex-grow text-md mb-10">
-            {{ info.searchInfo.textSnippet }}
+            {{ $route.params.snippet }}
           </p>
 
           <div class="buttons flex">
             <a
               href="#"
-              class="py-4 px-7 rounded-md transition-colors bg-gray-600 hover:bg-gray-800 text-white mr-6"
+              class="py-4 px-7 rounded-md transition-colors bg-gray-600 hover:bg-gray-900 text-white mr-6"
               >Mark as Read</a
             >
             <a
               href="#"
-              class="py-4 px-7 rounded-md transition-colors border hover:border-transparent hover:bg-gray-800 hover:text-white border-gray-600"
+              class="py-4 px-7 rounded-md transition-colors border hover:border-transparent hover:bg-gray-900 hover:text-white border-gray-600"
               >Save for Later</a
             >
           </div>
@@ -71,5 +71,9 @@ export default {
 <style>
 .book-container {
   margin-bottom: -12%;
+}
+
+.book-image {
+  height: 25rem;
 }
 </style>

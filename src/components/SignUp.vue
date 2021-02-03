@@ -1,7 +1,10 @@
 <template>
   <article class="sign-up bg-gray-100 py-12">
     <div class="container">
-      <form class="bg-white p-10 rounded-md shadow-md w-1/3 mx-auto">
+      <form
+        @submit.prevent="signUp"
+        class="bg-white p-10 rounded-md shadow-md w-1/3 mx-auto"
+      >
         <h1 class="text-center mb-8">Sign Up</h1>
         <div class="form-field flex flex-col mb-4">
           <label for="name" class="mb-3">Name</label>
@@ -10,6 +13,7 @@
             id="name"
             class="p-3 bg-gray-100 rounded"
             placeholder="Enter your name"
+            v-model="name"
           />
         </div>
         <div class="form-field flex flex-col mb-4">
@@ -19,6 +23,7 @@
             id="email"
             class="p-3 bg-gray-100 rounded"
             placeholder="Enter your email address"
+            v-model="email"
           />
         </div>
         <div class="form-field flex flex-col mb-4">
@@ -28,6 +33,7 @@
             id="password"
             class="p-3 bg-gray-100 rounded"
             placeholder="*******"
+            v-model="password"
           />
         </div>
         <div class="form-field flex flex-col mb-4">
@@ -37,55 +43,114 @@
             id="password"
             class="p-3 bg-gray-100 rounded"
             placeholder="*******"
+            v-model="confirmPassword"
           />
         </div>
         <h3 class="text-xl my-4">Favorite Genres</h3>
-        <div class="favorite-genres grid grid-cols-3 gap-4 text-center">
+        <div class="favorite-genres grid grid-cols-3 gap-4 text-center mb-4">
           <div class="form-field custom-checkbox mb-4">
-            <input type="checkbox" id="action" />
+            <input
+              type="checkbox"
+              id="action"
+              value="action"
+              v-model="genres"
+            />
             <label for="action">Action</label>
           </div>
           <div class="form-field custom-checkbox mb-4">
-            <input type="checkbox" id="horror" />
+            <input
+              type="checkbox"
+              id="horror"
+              value="horror"
+              v-model="genres"
+            />
             <label for="horror">Horror</label>
           </div>
           <div class="form-field custom-checkbox mb-4">
-            <input type="checkbox" id="adventure" />
+            <input
+              type="checkbox"
+              id="adventure"
+              value="adventure"
+              v-model="genres"
+            />
             <label for="adventure">Adventure</label>
           </div>
           <div class="form-field custom-checkbox mb-4">
-            <input type="checkbox" id="sci-fi" />
+            <input
+              type="checkbox"
+              id="sci-fi"
+              value="sci-fi"
+              v-model="genres"
+            />
             <label for="sci-fi">Sci-Fi</label>
           </div>
           <div class="form-field custom-checkbox mb-4">
-            <input type="checkbox" id="fiction" />
+            <input
+              type="checkbox"
+              id="fiction"
+              value="fiction"
+              v-model="genres"
+            />
             <label for="fiction">Fiction</label>
           </div>
           <div class="form-field custom-checkbox mb-4">
-            <input type="checkbox" id="comics" />
+            <input
+              type="checkbox"
+              id="comics"
+              value="comics"
+              v-model="genres"
+            />
             <label for="comics">Comics</label>
           </div>
           <div class="form-field custom-checkbox mb-4">
-            <input type="checkbox" id="mystery" />
+            <input
+              type="checkbox"
+              id="mystery"
+              value="mystery"
+              v-model="genres"
+            />
             <label for="mystery">Mystery</label>
           </div>
           <div class="form-field custom-checkbox mb-4">
-            <input type="checkbox" id="fantasy" />
+            <input
+              type="checkbox"
+              id="fantasy"
+              value="fantasy"
+              v-model="genres"
+            />
             <label for="fantasy">Fantasy</label>
           </div>
           <div class="form-field custom-checkbox mb-4">
-            <input type="checkbox" id="romance" />
+            <input
+              type="checkbox"
+              id="romance"
+              value="romance"
+              v-model="genres"
+            />
             <label for="romance">Romance</label>
           </div>
           <div class="form-field custom-checkbox mb-4">
-            <input type="checkbox" id="Suspense" />
+            <input
+              type="checkbox"
+              id="Suspense"
+              value="suspense"
+              v-model="genres"
+            />
             <label for="Suspense">Suspense</label>
           </div>
           <div class="form-field custom-checkbox mb-4">
-            <input type="checkbox" id="thriller" />
+            <input
+              type="checkbox"
+              id="thriller"
+              value="thriller"
+              v-model="genres"
+            />
             <label for="thriller">Thriller</label>
           </div>
         </div>
+        <button class="border border-gray-200 p-3 w-full rounded-md">
+          Sign Up
+        </button>
       </form>
       <p class="text-center mt-8">
         Already have an account?
@@ -98,11 +163,18 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      name: null,
+      email: null,
+      password: null,
+      confirmPassword: null,
+      genres: [],
+    };
   },
-  mounted() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    console.log(checkboxes);
+  methods: {
+    signUp() {
+      console.log(this.genres);
+    },
   },
 };
 </script>

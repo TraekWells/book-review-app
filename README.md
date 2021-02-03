@@ -19,3 +19,4 @@ A good friend of mine reads quite a bit of books and he was looking for a way to
 - [ ] Allow the user to scan the barcode to search
 - [ ] Sanitize HTML
 - [ ] Make Responsive
+- [ ] Set up route guarding

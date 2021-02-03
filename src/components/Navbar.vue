@@ -14,7 +14,7 @@
         </li>
         <li>
           <router-link :to="{ name: 'SavedBooks' }" class="p-4"
-            >Saved Books</router-link
+            >Bookshelf</router-link
           >
         </li>
       </ul>

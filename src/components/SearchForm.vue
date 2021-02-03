@@ -30,7 +30,7 @@ export default {
   methods: {
     handleForm() {
       const searchQuery = this.searchQuery;
-      const api = `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}&langRestrict=en&maxResults=20&key=${process.env.VUE_APP_API_KEY}`;
+      const api = `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}&printType=books&langRestrict=en&maxResults=20&key=${process.env.VUE_APP_API_KEY}`;
 
       axios
         .get(api)

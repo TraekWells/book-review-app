@@ -6,10 +6,16 @@ import SavedBooks from "../views/SavedBooks.vue";
 import Library from "../views/Library.vue";
 import BookDetails from "../views/BookDetails.vue";
 import SignUp from "../views/SignUp.vue";
+import SignIn from "../views/SignIn.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: "/sign-in",
+    name: "SignIn",
+    component: SignIn,
+  },
   {
     path: "/sign-up",
     name: "SignUp",

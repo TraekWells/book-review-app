@@ -39,7 +39,7 @@
             placeholder="*******"
           />
         </div>
-        <h2>Favorite Genres</h2>
+        <h3 class="text-xl my-4">Favorite Genres</h3>
         <div class="favorite-genres grid grid-cols-3 gap-4 text-center">
           <div class="form-field custom-checkbox mb-4">
             <input type="checkbox" id="action" />
@@ -88,7 +88,8 @@
         </div>
       </form>
       <p class="text-center mt-8">
-        Already have an account? <router-link to="#">Sign in</router-link>
+        Already have an account?
+        <router-link :to="{ name: 'SignIn' }">Sign in</router-link>
       </p>
     </div>
   </article>

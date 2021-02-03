@@ -56,7 +56,7 @@ export default {
     },
   },
   mounted() {
-    const api = `https://www.googleapis.com/books/v1/volumes?q=${this.interests}&langRestrict=en&maxResults=20&key=${process.env.VUE_APP_API_KEY}`;
+    const api = `https://www.googleapis.com/books/v1/volumes?q=subject:horror&printType=books&langRestrict=en&maxResults=20&key=${process.env.VUE_APP_API_KEY}`;
 
     axios
       .get(api)

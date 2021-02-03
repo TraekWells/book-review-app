@@ -21,7 +21,7 @@
       <h3 class="text-2xl mb-4 font-bold">
         {{ book.volumeInfo.title }}
       </h3>
-      <p v-if="book.searchInfo" class="flex-grow text-md mb-4">
+      <p v-if="this.snippet" class="flex-grow text-md mb-4">
         {{
           this.stripContent(
             this.replaceEntity(this.book.searchInfo.textSnippet)
@@ -74,9 +74,11 @@ export default {
   },
   created() {
     this.title = slugify(this.book.volumeInfo.title, { lower: true });
-    this.snippet = this.stripContent(
-      this.replaceEntity(this.book.searchInfo.textSnippet)
-    );
+    if (this.book.searchInfo) {
+      this.snippet = this.stripContent(
+        this.replaceEntity(this.book.searchInfo.textSnippet)
+      );
+    }
     aos.init();
   },
 };

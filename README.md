@@ -13,8 +13,7 @@ A good friend of mine reads quite a bit of books and he was looking for a way to
 
 ## Todos
 
-~~- [ ] Clicking on an icon will favorite the book and save to local storage~~ Decided to use a database instead
-
+- [ ] Clicking on an icon will favorite the book and save to the database
 - [ ] Refactor form validation
 - [ ] Think of a more interesting layout
 - [ ] Allow the user to scan the barcode to search

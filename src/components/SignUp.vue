@@ -202,7 +202,6 @@ export default {
                 console.log(err);
                 this.passwordFeedback = err.message;
               });
-            this.emailFeedback = "This email is free to use";
           }
         });
       }

@@ -14,7 +14,7 @@
         </li>
         <li>
           <router-link :to="{ name: 'SavedBooks' }" class="p-4"
-            >Bookshelf</router-link
+            >Saved Books</router-link
           >
         </li>
         <li>
@@ -61,7 +61,6 @@ export default {
     },
   },
   created() {
-    // let user = projectAuth.currentUser;
     projectAuth.onAuthStateChanged((user) => {
       if (user) {
         this.user = user;

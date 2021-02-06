@@ -189,7 +189,7 @@ export default {
               .then((cred) => {
                 reference
                   .set({
-                    bookshelf: null,
+                    savedBooks: null,
                     favoriteGenres: this.genres,
                     library: null,
                     user_id: cred.user.uid,

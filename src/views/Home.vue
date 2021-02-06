@@ -37,6 +37,7 @@
 import axios from "axios";
 import SearchForm from "@/components/SearchForm";
 import BookCard from "@/components/BookCard";
+import { projectAuth, projectFirestore } from "@/firebase/config";
 
 export default {
   components: {
@@ -56,17 +57,30 @@ export default {
     },
   },
   mounted() {
-    const api = `https://www.googleapis.com/books/v1/volumes?q=subject:horror&printType=books&langRestrict=en&maxResults=20&key=${process.env.VUE_APP_API_KEY}`;
+    let currentUser = projectAuth.currentUser.uid;
 
-    axios
-      .get(api)
-      .then((response) => {
-        response.data.items.forEach((book) => {
-          this.recommendedBooks.push(book);
+    projectFirestore
+      .collection("users")
+      .where("user_id", "==", currentUser)
+      .get()
+      .then((user) => {
+        user.docs.forEach((doc) => {
+          let data = doc.data();
+          this.interests = data.favoriteGenres.join().replaceAll(",", "+");
+
+          const api = `https://www.googleapis.com/books/v1/volumes?q=${this.interests}&printType=books&langRestrict=en&maxResults=24&key=${process.env.VUE_APP_API_KEY}`;
+
+          axios
+            .get(api)
+            .then((response) => {
+              response.data.items.forEach((book) => {
+                this.recommendedBooks.push(book);
+              });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         });
-      })
-      .catch((error) => {
-        console.log(error);
       });
   },
 };

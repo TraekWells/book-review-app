@@ -6,6 +6,7 @@
     data-aos-delay="100"
   >
     <BookmarkIcon
+      @click="saveBookToDatabase"
       class="favorite-icon absolute top-5 right-5 w-5 cursor-pointer transition-colors hover:text-blue-700"
     />
     <img
@@ -21,17 +22,13 @@
       <h3 class="text-2xl mb-4 font-bold">
         {{ book.volumeInfo.title }}
       </h3>
-      <p v-if="this.snippet" class="flex-grow text-md mb-4">
-        {{
-          this.stripContent(
-            this.replaceEntity(this.book.searchInfo.textSnippet)
-          )
-        }}
+      <p v-if="this.book.searchInfo" class="flex-grow text-md mb-4">
+        {{ bookSnippet }}
       </p>
       <router-link
         :to="{
           name: 'BookDetails',
-          params: { title: title, snippet: snippet, book: book },
+          params: { title: sluggedTitle, snippet: bookSnippet, book: book },
         }"
         class="learn-more flex text-blue-600 hover:text-blue-800"
         >Learn More <ArrowRightIcon class="ml-2 transition-all"
@@ -45,6 +42,7 @@ import { BookmarkIcon, ArrowRightIcon } from "vue-feather-icons";
 import slugify from "slugify";
 import aos from "aos";
 import "aos/dist/aos.css";
+// import { projectFirestore, projectAuth } from "@/firebase/config";
 
 export default {
   name: "BookCard",
@@ -55,8 +53,18 @@ export default {
   },
   data() {
     return {
-      title: "",
-      snippet: "",
+      sluggedTitle: "",
+      bookSnippet: "",
+      // saveBook: {
+      //   author: this.book.volumeInfo.authors[0],
+      //   title: this.book.volumeInfo.title,
+      //   description: this.book.volumeInfo.description,
+      //   snippet: this.book.searchInfo.textSnippet
+      //     ? this.book.searchInfo.textSnippet
+      //     : null,
+      //   image: this.book.volumeInfo.imageLinks.thumbnail,
+      //   review: null,
+      // },
     };
   },
   components: {
@@ -71,13 +79,26 @@ export default {
     replaceEntity(str) {
       return str.replaceAll("&#39;", "'");
     },
+    saveBookToDatabase() {
+      console.log(this);
+      //   let currentUser = projectAuth.currentUser.uid;
+
+      //   projectFirestore
+      //     .collection("users")
+      //     .where("user_id", "==", currentUser)
+      //     .set({ savedBooks: this.saveBook })
+      //     .then(this.saveBook);
+      // },
+    },
   },
   created() {
-    this.title = slugify(this.book.volumeInfo.title, { lower: true });
+    this.sluggedTitle = slugify(this.book.volumeInfo.title, { lower: true });
     if (this.book.searchInfo) {
-      this.snippet = this.stripContent(
+      this.bookSnippet = this.stripContent(
         this.replaceEntity(this.book.searchInfo.textSnippet)
       );
+    } else {
+      this.bookSnippet = "";
     }
     aos.init();
   },

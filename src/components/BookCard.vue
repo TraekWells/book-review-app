@@ -39,10 +39,10 @@
 
 <script>
 import { BookmarkIcon, ArrowRightIcon } from "vue-feather-icons";
+import { projectFirestore, projectAuth, firebase } from "@/firebase/config";
 import slugify from "slugify";
 import aos from "aos";
 import "aos/dist/aos.css";
-// import { projectFirestore, projectAuth } from "@/firebase/config";
 
 export default {
   name: "BookCard",
@@ -55,16 +55,6 @@ export default {
     return {
       sluggedTitle: "",
       bookSnippet: "",
-      // saveBook: {
-      //   author: this.book.volumeInfo.authors[0],
-      //   title: this.book.volumeInfo.title,
-      //   description: this.book.volumeInfo.description,
-      //   snippet: this.book.searchInfo.textSnippet
-      //     ? this.book.searchInfo.textSnippet
-      //     : null,
-      //   image: this.book.volumeInfo.imageLinks.thumbnail,
-      //   review: null,
-      // },
     };
   },
   components: {
@@ -80,15 +70,28 @@ export default {
       return str.replaceAll("&#39;", "'");
     },
     saveBookToDatabase() {
-      console.log(this);
-      //   let currentUser = projectAuth.currentUser.uid;
+      let saveBook = {
+        author: this.book.volumeInfo.authors[0],
+        title: this.book.volumeInfo.title,
+        description: this.book.volumeInfo.description,
+        snippet: this.book.searchInfo.textSnippet
+          ? this.book.searchInfo.textSnippet
+          : null,
+        image: this.book.volumeInfo.imageLinks.thumbnail,
+        review: null,
+      };
 
-      //   projectFirestore
-      //     .collection("users")
-      //     .where("user_id", "==", currentUser)
-      //     .set({ savedBooks: this.saveBook })
-      //     .then(this.saveBook);
-      // },
+      console.log(saveBook);
+
+      let currentUser = projectAuth.currentUser.email;
+
+      projectFirestore
+        .collection("users")
+        .doc(currentUser)
+        .update({
+          savedBooks: firebase.firestore.FieldValue.arrayUnion(saveBook),
+        })
+        .then(console.log("It worked"));
     },
   },
   created() {

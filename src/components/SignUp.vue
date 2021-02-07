@@ -189,9 +189,9 @@ export default {
               .then((cred) => {
                 reference
                   .set({
-                    savedBooks: null,
+                    savedBooks: [],
                     favoriteGenres: this.genres,
-                    library: null,
+                    library: [],
                     user_id: cred.user.uid,
                   })
                   .then(() => {

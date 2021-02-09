@@ -74,7 +74,18 @@ export default {
             .get(api)
             .then((response) => {
               response.data.items.forEach((book) => {
-                this.recommendedBooks.push(book);
+                let bookObject = {
+                  author: book.volumeInfo.authors[0],
+                  title: book.volumeInfo.title,
+                  description: book.volumeInfo.description,
+                  ...(book.searchInfo.textSnippet && {
+                    snippet: book.searchInfo.textSnippet,
+                  }),
+                  ...(book.volumeInfo.imageLinks && {
+                    image: book.volumeInfo.imageLinks.thumbnail,
+                  }),
+                };
+                this.recommendedBooks.push(bookObject);
               });
             })
             .catch((error) => {

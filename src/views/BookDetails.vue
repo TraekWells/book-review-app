@@ -25,7 +25,7 @@
 
           <div class="buttons flex">
             <a
-              href="#"
+              @click="saveBookToLibrary"
               class="py-4 px-7 rounded-md transition-colors bg-gray-600 hover:bg-gray-900 text-white mr-6"
               >Mark as Read</a
             >
@@ -58,12 +58,37 @@
 </template>
 
 <script>
+import { projectAuth, projectFirestore, firebase } from "@/firebase/config";
+
 export default {
   props: ["book"],
   data() {
     return {
       info: this.$route.params.book,
     };
+  },
+  methods: {
+    saveBookToLibrary() {
+      let saveBook = {
+        author: this.info.volumeInfo.authors[0],
+        title: this.info.volumeInfo.title,
+        description: this.info.volumeInfo.description,
+        snippet: this.info.searchInfo.textSnippet
+          ? this.info.searchInfo.textSnippet
+          : null,
+        image: this.info.volumeInfo.imageLinks.thumbnail,
+        review: null,
+      };
+      let currentUser = projectAuth.currentUser.email;
+
+      projectFirestore
+        .collection("users")
+        .doc(currentUser)
+        .update({
+          library: firebase.firestore.FieldValue.arrayUnion(saveBook),
+        })
+        .then(console.log("It worked"));
+    },
   },
 };
 </script>

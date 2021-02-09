@@ -6,7 +6,7 @@
     data-aos-delay="100"
   >
     <BookmarkIcon
-      @click="saveBookToDatabase"
+      @click="saveBookForLater"
       class="favorite-icon absolute top-5 right-5 w-5 cursor-pointer transition-colors hover:text-blue-700"
     />
     <img
@@ -69,7 +69,7 @@ export default {
     replaceEntity(str) {
       return str.replaceAll("&#39;", "'");
     },
-    saveBookToDatabase() {
+    saveBookForLater() {
       let saveBook = {
         author: this.book.author,
         title: this.book.title,

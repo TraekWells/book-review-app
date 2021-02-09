@@ -27,7 +27,7 @@
               >Mark as Read</a
             >
             <a
-              href="#"
+              @click="saveBookForLater"
               class="py-4 px-7 rounded-md transition-colors border hover:border-transparent hover:bg-gray-900 hover:text-white border-gray-600"
               >Save for Later</a
             >
@@ -66,6 +66,7 @@ export default {
   },
   methods: {
     saveBookToLibrary() {
+      let currentUser = projectAuth.currentUser.email;
       let saveBook = {
         author: this.info.author,
         title: this.info.title,
@@ -79,13 +80,34 @@ export default {
         review: null,
       };
 
-      let currentUser = projectAuth.currentUser.email;
-
       projectFirestore
         .collection("users")
         .doc(currentUser)
         .update({
           library: firebase.firestore.FieldValue.arrayUnion(saveBook),
+        })
+        .then(console.log("It worked"));
+    },
+    saveBookForLater() {
+      let currentUser = projectAuth.currentUser.email;
+      let saveBook = {
+        author: this.info.author,
+        title: this.info.title,
+        description: this.info.description,
+        ...(this.info.snippet && {
+          snippet: this.info.snippet,
+        }),
+        ...(this.info.image && {
+          image: this.info.image,
+        }),
+        review: null,
+      };
+
+      projectFirestore
+        .collection("users")
+        .doc(currentUser)
+        .update({
+          savedBooks: firebase.firestore.FieldValue.arrayUnion(saveBook),
         })
         .then(console.log("It worked"));
     },

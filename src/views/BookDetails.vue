@@ -2,25 +2,22 @@
   <div class="book-details">
     <header class="bg-gray-800 text-white mb-20 py-20 relative">
       <div class="container flex">
-        <div
-          v-if="info.volumeInfo.imageLinks.thumbnail"
-          class="book-container w-auto mr-16"
-        >
+        <div v-if="info.image" class="book-container w-auto mr-16">
           <img
-            :src="info.volumeInfo.imageLinks.thumbnail"
+            :src="info.image"
             alt=""
             class="book-image object-cover rounded-md mr-8"
           />
         </div>
         <div class="w-auto max-w-2xl">
           <p class="text-green-300 font-bold uppercase mb-3">
-            {{ info.volumeInfo.authors[0] }}
+            {{ info.author }}
           </p>
           <h1 class="text-5xl mb-5">
-            {{ info.volumeInfo.title }}
+            {{ info.title }}
           </h1>
-          <p v-if="info.searchInfo" class="flex-grow text-md mb-10">
-            {{ $route.params.snippet }}
+          <p v-if="info.snippet" class="flex-grow text-md mb-10">
+            {{ info.snippet }}
           </p>
 
           <div class="buttons flex">
@@ -43,7 +40,7 @@
         <article class="description mr-14 w-1/2">
           <h2>Description</h2>
           <p class="text-lg leading-relaxed mb-10">
-            {{ info.volumeInfo.description }}
+            {{ info.description }}
           </p>
         </article>
         <article class="review bg-gray-100 p-6 rounded-md w-1/2">
@@ -70,15 +67,18 @@ export default {
   methods: {
     saveBookToLibrary() {
       let saveBook = {
-        author: this.info.volumeInfo.authors[0],
-        title: this.info.volumeInfo.title,
-        description: this.info.volumeInfo.description,
-        snippet: this.info.searchInfo.textSnippet
-          ? this.info.searchInfo.textSnippet
-          : null,
-        image: this.info.volumeInfo.imageLinks.thumbnail,
+        author: this.info.author,
+        title: this.info.title,
+        description: this.info.description,
+        ...(this.info.snippet && {
+          snippet: this.info.snippet,
+        }),
+        ...(this.info.image && {
+          image: this.info.image,
+        }),
         review: null,
       };
+
       let currentUser = projectAuth.currentUser.email;
 
       projectFirestore

@@ -10,19 +10,19 @@
       class="favorite-icon absolute top-5 right-5 w-5 cursor-pointer transition-colors hover:text-blue-700"
     />
     <img
-      v-if="book.volumeInfo.imageLinks"
-      :src="book.volumeInfo.imageLinks.thumbnail"
+      v-if="book.image"
+      :src="book.image"
       alt=""
       class="image rounded-md mb-4 md:mb-0 md:mr-10 block self-start"
     />
     <div class="flex flex-col">
-      <p class="text-gray-600 uppercase" v-if="book.volumeInfo.authors">
-        {{ book.volumeInfo.authors[0] }}
+      <p class="text-gray-600 uppercase" v-if="book.author">
+        {{ book.author }}
       </p>
       <h3 class="text-2xl mb-4 font-bold">
-        {{ book.volumeInfo.title }}
+        {{ book.title }}
       </h3>
-      <p v-if="this.book.searchInfo" class="flex-grow text-md mb-4">
+      <p v-if="book.snippet" class="flex-grow text-md mb-4">
         {{ bookSnippet }}
       </p>
       <router-link
@@ -71,17 +71,17 @@ export default {
     },
     saveBookToDatabase() {
       let saveBook = {
-        author: this.book.volumeInfo.authors[0],
-        title: this.book.volumeInfo.title,
-        description: this.book.volumeInfo.description,
-        snippet: this.book.searchInfo.textSnippet
-          ? this.book.searchInfo.textSnippet
-          : null,
-        image: this.book.volumeInfo.imageLinks.thumbnail,
+        author: this.book.author,
+        title: this.book.title,
+        description: this.book.description,
+        ...(this.book.snippet && {
+          snippet: this.book.snippet,
+        }),
+        ...(this.book.image && {
+          image: this.book.image,
+        }),
         review: null,
       };
-
-      console.log(saveBook);
 
       let currentUser = projectAuth.currentUser.email;
 
@@ -95,10 +95,11 @@ export default {
     },
   },
   created() {
-    this.sluggedTitle = slugify(this.book.volumeInfo.title, { lower: true });
-    if (this.book.searchInfo) {
+    this.sluggedTitle = slugify(this.book.title, { lower: true });
+
+    if (this.book.snippet) {
       this.bookSnippet = this.stripContent(
-        this.replaceEntity(this.book.searchInfo.textSnippet)
+        this.replaceEntity(this.book.snippet)
       );
     } else {
       this.bookSnippet = "";

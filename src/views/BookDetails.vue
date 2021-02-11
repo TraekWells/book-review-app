@@ -91,90 +91,46 @@ export default {
   },
   methods: {
     saveBookToLibrary() {
-      let saveBook = {
-        author: this.info.author,
-        title: this.info.title,
-        description: this.info.description,
-        ...(this.info.snippet && {
-          snippet: this.info.snippet,
-        }),
-        ...(this.info.image && {
-          image: this.info.image,
-        }),
-        review: null,
-      };
-
       projectFirestore
         .collection("users")
         .doc(this.currentUser)
         .update({
-          library: firebase.firestore.FieldValue.arrayUnion(saveBook),
+          library: firebase.firestore.FieldValue.arrayUnion(
+            this.$route.params.book
+          ),
         })
         .then((this.markedAsRead = true));
     },
     saveBookForLater() {
-      let saveBook = {
-        author: this.info.author,
-        title: this.info.title,
-        description: this.info.description,
-        ...(this.info.snippet && {
-          snippet: this.info.snippet,
-        }),
-        ...(this.info.image && {
-          image: this.info.image,
-        }),
-        review: null,
-      };
-
       projectFirestore
         .collection("users")
         .doc(this.currentUser)
         .update({
-          savedBooks: firebase.firestore.FieldValue.arrayUnion(saveBook),
+          savedBooks: firebase.firestore.FieldValue.arrayUnion(
+            this.$route.params.book
+          ),
         })
         .then((this.savedForLater = true));
     },
     removeBookFromSavedBooks() {
-      let saveBook = {
-        author: this.info.author,
-        title: this.info.title,
-        description: this.info.description,
-        ...(this.info.snippet && {
-          snippet: this.info.snippet,
-        }),
-        ...(this.info.image && {
-          image: this.info.image,
-        }),
-        review: null,
-      };
-
       projectFirestore
         .collection("users")
         .doc(this.currentUser)
         .update({
-          savedBooks: firebase.firestore.FieldValue.arrayRemove(saveBook),
+          savedBooks: firebase.firestore.FieldValue.arrayRemove(
+            this.$route.params.book
+          ),
         })
         .then((this.savedForLater = false));
     },
     removeBookFromLibrary() {
-      let saveBook = {
-        author: this.info.author,
-        title: this.info.title,
-        description: this.info.description,
-        ...(this.info.snippet && {
-          snippet: this.info.snippet,
-        }),
-        ...(this.info.image && {
-          image: this.info.image,
-        }),
-        review: null,
-      };
-
       projectFirestore
         .collection("users")
         .doc(this.currentUser)
         .update({
-          library: firebase.firestore.FieldValue.arrayRemove(saveBook),
+          library: firebase.firestore.FieldValue.arrayRemove(
+            this.$route.params.book
+          ),
         })
         .then((this.markedAsRead = false));
     },

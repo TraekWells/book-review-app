@@ -22,9 +22,16 @@
 
           <div class="buttons flex">
             <a
+              v-if="!markedAsRead"
               @click="saveBookToLibrary"
               class="py-4 px-7 rounded-md transition-colors bg-gray-600 hover:bg-gray-900 text-white mr-6 cursor-pointer"
               >Mark as Read</a
+            >
+            <a
+              v-else
+              @click="removeBookFromLibrary"
+              class="py-4 px-7 rounded-md transition-colors bg-gray-600 hover:bg-gray-900 text-white mr-6 cursor-pointer"
+              >Book was read!</a
             >
             <a
               v-if="!savedForLater"
@@ -103,7 +110,7 @@ export default {
         .update({
           library: firebase.firestore.FieldValue.arrayUnion(saveBook),
         })
-        .then(console.log("It worked"));
+        .then((this.markedAsRead = true));
     },
     saveBookForLater() {
       let saveBook = {
@@ -149,10 +156,31 @@ export default {
         })
         .then((this.savedForLater = false));
     },
+    removeBookFromLibrary() {
+      let saveBook = {
+        author: this.info.author,
+        title: this.info.title,
+        description: this.info.description,
+        ...(this.info.snippet && {
+          snippet: this.info.snippet,
+        }),
+        ...(this.info.image && {
+          image: this.info.image,
+        }),
+        review: null,
+      };
+
+      projectFirestore
+        .collection("users")
+        .doc(this.currentUser)
+        .update({
+          library: firebase.firestore.FieldValue.arrayRemove(saveBook),
+        })
+        .then((this.markedAsRead = false));
+    },
   },
   mounted() {
-    // Check if the book exists in the database
-
+    // Check if the book is the user's 'savedBooks' array
     projectFirestore
       .collection("users")
       .doc(this.currentUser)
@@ -161,6 +189,19 @@ export default {
         doc.data().savedBooks.forEach((book) => {
           if (book.title === this.info.title) {
             this.savedForLater = true;
+          }
+        });
+      });
+
+    // Check if the book is the user's 'library' array
+    projectFirestore
+      .collection("users")
+      .doc(this.currentUser)
+      .get()
+      .then((doc) => {
+        doc.data().library.forEach((book) => {
+          if (book.title === this.info.title) {
+            this.markedAsRead = true;
           }
         });
       });

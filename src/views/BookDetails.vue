@@ -23,13 +23,20 @@
           <div class="buttons flex">
             <a
               @click="saveBookToLibrary"
-              class="py-4 px-7 rounded-md transition-colors bg-gray-600 hover:bg-gray-900 text-white mr-6"
+              class="py-4 px-7 rounded-md transition-colors bg-gray-600 hover:bg-gray-900 text-white mr-6 cursor-pointer"
               >Mark as Read</a
             >
             <a
+              v-if="!savedForLater"
               @click="saveBookForLater"
-              class="py-4 px-7 rounded-md transition-colors border hover:border-transparent hover:bg-gray-900 hover:text-white border-gray-600"
+              class="py-4 px-7 rounded-md transition-colors border hover:border-transparent hover:bg-gray-900 hover:text-white border-gray-600 cursor-pointer"
               >Save for Later</a
+            >
+            <a
+              v-else
+              @click="removeBookFromSavedBooks"
+              class="py-4 px-7 rounded-md transition-colors border hover:border-transparent hover:bg-gray-900 hover:text-white border-gray-600 cursor-pointer"
+              >Remove From Saved Books</a
             >
           </div>
         </div>
@@ -43,11 +50,19 @@
             {{ info.description }}
           </p>
         </article>
-        <article class="review bg-gray-100 p-6 rounded-md w-1/2">
+        <article
+          v-if="markedAsRead"
+          class="review bg-gray-100 p-6 rounded-md w-1/2"
+        >
           <h2>My Review</h2>
-          <p class="text-lg leading-relaxed mb-10">
-            Review goes here
-          </p>
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+            placeholder="What did you think about the book?"
+            class="p-3 w-full rounded-md resize-none"
+          ></textarea>
         </article>
       </div>
     </main>
@@ -62,11 +77,13 @@ export default {
   data() {
     return {
       info: this.$route.params.book,
+      currentUser: projectAuth.currentUser.email,
+      markedAsRead: null,
+      savedForLater: null,
     };
   },
   methods: {
     saveBookToLibrary() {
-      let currentUser = projectAuth.currentUser.email;
       let saveBook = {
         author: this.info.author,
         title: this.info.title,
@@ -82,14 +99,13 @@ export default {
 
       projectFirestore
         .collection("users")
-        .doc(currentUser)
+        .doc(this.currentUser)
         .update({
           library: firebase.firestore.FieldValue.arrayUnion(saveBook),
         })
         .then(console.log("It worked"));
     },
     saveBookForLater() {
-      let currentUser = projectAuth.currentUser.email;
       let saveBook = {
         author: this.info.author,
         title: this.info.title,
@@ -105,12 +121,49 @@ export default {
 
       projectFirestore
         .collection("users")
-        .doc(currentUser)
+        .doc(this.currentUser)
         .update({
           savedBooks: firebase.firestore.FieldValue.arrayUnion(saveBook),
         })
-        .then(console.log("It worked"));
+        .then((this.savedForLater = true));
     },
+    removeBookFromSavedBooks() {
+      let saveBook = {
+        author: this.info.author,
+        title: this.info.title,
+        description: this.info.description,
+        ...(this.info.snippet && {
+          snippet: this.info.snippet,
+        }),
+        ...(this.info.image && {
+          image: this.info.image,
+        }),
+        review: null,
+      };
+
+      projectFirestore
+        .collection("users")
+        .doc(this.currentUser)
+        .update({
+          savedBooks: firebase.firestore.FieldValue.arrayRemove(saveBook),
+        })
+        .then((this.savedForLater = false));
+    },
+  },
+  mounted() {
+    // Check if the book exists in the database
+
+    projectFirestore
+      .collection("users")
+      .doc(this.currentUser)
+      .get()
+      .then((doc) => {
+        doc.data().savedBooks.forEach((book) => {
+          if (book.title === this.info.title) {
+            this.savedForLater = true;
+          }
+        });
+      });
   },
 };
 </script>

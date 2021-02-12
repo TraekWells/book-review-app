@@ -55,6 +55,7 @@ export default {
     return {
       sluggedTitle: "",
       bookSnippet: "",
+      currentUser: projectAuth.currentUser.email,
     };
   },
   components: {
@@ -83,11 +84,9 @@ export default {
         review: null,
       };
 
-      let currentUser = projectAuth.currentUser.email;
-
       projectFirestore
         .collection("users")
-        .doc(currentUser)
+        .doc(this.currentUser)
         .update({
           savedBooks: firebase.firestore.FieldValue.arrayUnion(saveBook),
         })

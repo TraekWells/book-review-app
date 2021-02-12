@@ -30,13 +30,25 @@ export default {
   methods: {
     handleForm() {
       const searchQuery = this.searchQuery;
-      const api = `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}&printType=books&langRestrict=en&maxResults=20&key=${process.env.VUE_APP_API_KEY}`;
+      const api = `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}&printType=books&langRestrict=en&maxResults=30&key=${process.env.VUE_APP_API_KEY}`;
 
       axios
         .get(api)
         .then((response) => {
           response.data.items.forEach((book) => {
-            this.searchResults.push(book);
+            let bookObject = {
+              author: book.volumeInfo.authors[0],
+              title: book.volumeInfo.title,
+              description: book.volumeInfo.description,
+              ...(book.searchInfo && {
+                snippet: book.searchInfo.textSnippet,
+              }),
+              ...(book.volumeInfo.imageLinks && {
+                image: book.volumeInfo.imageLinks.thumbnail,
+              }),
+              review: null,
+            };
+            this.searchResults.push(bookObject);
           });
           this.$emit("books", this.searchResults);
         })

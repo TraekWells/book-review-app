@@ -68,7 +68,7 @@ export default {
           let data = doc.data();
           this.interests = data.favoriteGenres.join().replaceAll(",", "+");
 
-          const api = `https://www.googleapis.com/books/v1/volumes?q=${this.interests}&printType=books&langRestrict=en&maxResults=24&key=${process.env.VUE_APP_API_KEY}`;
+          const api = `https://www.googleapis.com/books/v1/volumes?q=${this.interests}&printType=books&langRestrict=en&maxResults=30&key=${process.env.VUE_APP_API_KEY}`;
 
           axios
             .get(api)
@@ -84,6 +84,7 @@ export default {
                   ...(book.volumeInfo.imageLinks && {
                     image: book.volumeInfo.imageLinks.thumbnail,
                   }),
+                  review: null,
                 };
                 this.recommendedBooks.push(bookObject);
               });

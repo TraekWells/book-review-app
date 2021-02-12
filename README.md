@@ -21,4 +21,5 @@ A good friend of mine reads quite a bit of books and he was looking for a way to
 - [ ] Make Responsive
 - [x] Set up route guarding
 - [ ] Add a "Load More" button
-- [ ] Only allow a user to add a review if they've read a book
+- [x] Only allow a user to add a review if they've read a book
+- [ ] Allow the user to change their favorite genres

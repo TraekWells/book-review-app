@@ -69,7 +69,12 @@
             rows="10"
             placeholder="What did you think about the book?"
             class="p-3 w-full rounded-md resize-none"
+            v-model="review"
           ></textarea>
+          <a
+            class="inline-block mt-6 py-4 px-7 rounded-md transition-colors bg-gray-600 hover:bg-gray-900 text-white mr-6 cursor-pointer"
+            >Save Review</a
+          >
         </article>
       </div>
     </main>
@@ -87,6 +92,7 @@ export default {
       currentUser: projectAuth.currentUser.email,
       markedAsRead: null,
       savedForLater: null,
+      review: null,
     };
   },
   methods: {

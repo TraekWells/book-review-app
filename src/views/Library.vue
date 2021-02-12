@@ -12,7 +12,8 @@
       </div>
     </header>
     <main class="container px-7 md:px-20 mx-auto">
-      <div class="grid grid-cols-1 xl:grid-cols-2 gap-12">
+      <Loading v-if="loading" />
+      <div v-else class="grid grid-cols-1 xl:grid-cols-2 gap-12">
         <template v-for="(book, index) in library">
           <BookCard :book="book" :key="index" />
         </template>
@@ -23,15 +24,18 @@
 
 <script>
 import { projectAuth, projectFirestore } from "@/firebase/config";
+import Loading from "@/components/Loading";
 import BookCard from "@/components/BookCard";
 
 export default {
   components: {
     BookCard,
+    Loading,
   },
   data() {
     return {
       library: [],
+      loading: true,
     };
   },
   mounted() {
@@ -47,6 +51,7 @@ export default {
           data.library.forEach((book) => {
             this.library.push(book);
           });
+          this.loading = false;
         });
       });
   },

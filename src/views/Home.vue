@@ -15,7 +15,8 @@
     <main class="container px-7 md:px-20 mx-auto">
       <div v-if="!searchResults" class="recommended">
         <h2 class="text-center mb-10">Recommended For You</h2>
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-12">
+        <Loading v-if="loading" />
+        <div v-else class="grid grid-cols-1 xl:grid-cols-2 gap-12">
           <template v-for="(book, index) in recommendedBooks">
             <BookCard :book="book" :key="index" />
           </template>
@@ -37,18 +38,21 @@
 import axios from "axios";
 import SearchForm from "@/components/SearchForm";
 import BookCard from "@/components/BookCard";
+import Loading from "@/components/Loading";
 import { projectAuth, projectFirestore } from "@/firebase/config";
 
 export default {
   components: {
     SearchForm,
     BookCard,
+    Loading,
   },
   data() {
     return {
       searchResults: null,
       recommendedBooks: [],
       interests: null,
+      loading: true,
     };
   },
   methods: {
@@ -87,6 +91,7 @@ export default {
                   review: null,
                 };
                 this.recommendedBooks.push(bookObject);
+                this.loading = false;
               });
             })
             .catch((error) => {

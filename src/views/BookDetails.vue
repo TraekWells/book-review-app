@@ -62,19 +62,38 @@
           class="review bg-gray-100 p-6 rounded-md w-1/2"
         >
           <h2>My Review</h2>
-          <textarea
-            name=""
-            id=""
-            cols="30"
-            rows="10"
-            placeholder="What did you think about the book?"
-            class="p-3 w-full rounded-md resize-none"
-            v-model="review"
-          ></textarea>
-          <a
-            class="inline-block mt-6 py-4 px-7 rounded-md transition-colors bg-gray-600 hover:bg-gray-900 text-white mr-6 cursor-pointer"
-            >Save Review</a
-          >
+          <template v-if="!info.review">
+            <a
+              v-if="!reviewOpen"
+              @click="reviewOpen = !reviewOpen"
+              class="text-gray-700 py-3 px-4 inline-block border-gray-700 hover:text-white hover:border-transparent hover:bg-gray-700 transition-colors border bw rounded-md cursor-pointer"
+              >Write a review</a
+            >
+          </template>
+
+          <template v-if="info.review && !reviewOpen">
+            <p>{{ info.review }}</p>
+            <a
+              class="inline-block text-blue-600 underline mt-3 cursor-pointer"
+              @click="reviewOpen = true"
+              >Edit Review</a
+            >
+          </template>
+
+          <template v-if="reviewOpen">
+            <textarea
+              cols="30"
+              rows="10"
+              :placeholder="`What did you think about ${info.title}?`"
+              class="p-3 w-full rounded-md resize-none"
+              v-model="review"
+            ></textarea>
+            <a
+              @click="saveReview"
+              class="inline-block mt-6 py-4 px-7 rounded-md transition-colors bg-gray-600 hover:bg-gray-900 text-white mr-6 cursor-pointer"
+              >Save Review</a
+            >
+          </template>
         </article>
       </div>
     </main>
@@ -92,6 +111,7 @@ export default {
       currentUser: projectAuth.currentUser.email,
       markedAsRead: null,
       savedForLater: null,
+      reviewOpen: false,
       review: null,
     };
   },
@@ -139,6 +159,12 @@ export default {
           ),
         })
         .then((this.markedAsRead = false));
+    },
+    saveReview() {
+      this.removeBookFromLibrary();
+      this.$route.params.book.review = this.review;
+      this.reviewOpen = false;
+      this.saveBookToLibrary();
     },
   },
   mounted() {

@@ -2,12 +2,10 @@
   <div>
     <header class="bg-gray-800 text-white mb-20 px-6 md:px-0 py-16 relative">
       <div class="container sm:flex flex-col items-center">
-        <h1 class="text-5xl mb-5">Logbook</h1>
+        <h1 class="text-5xl mb-5">Bookshelf</h1>
         <p class="text-xl max-w-2xl leading-relaxed mb-10 md:text-center">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque
-          temporibus iste ut a facere, voluptatem dolorum, repudiandae maxime
-          doloremque non, fuga nobis error blanditiis omnis impedit hic porro
-          neque sunt.
+          A place to discover new books, review the books you've read and keep a
+          running list of books you want to read later.
         </p>
         <SearchForm @books="sendResults" class="md:absolute md:-bottom-7" />
       </div>
@@ -47,6 +45,9 @@ export default {
     BookCard,
     Loading,
   },
+  metaInfo: {
+    titleTemplate: "%s | Home",
+  },
   data() {
     return {
       searchResults: null,
@@ -79,10 +80,16 @@ export default {
             .then((response) => {
               response.data.items.forEach((book) => {
                 let bookObject = {
-                  author: book.volumeInfo.authors[0],
-                  title: book.volumeInfo.title,
-                  description: book.volumeInfo.description,
-                  ...(book.searchInfo.textSnippet && {
+                  ...(book.volumeInfo.authors && {
+                    author: book.volumeInfo.authors[0],
+                  }),
+                  ...(book.volumeInfo.title && {
+                    title: book.volumeInfo.title,
+                  }),
+                  ...(book.volumeInfo.description && {
+                    description: book.volumeInfo.description,
+                  }),
+                  ...(book.searchInfo && {
                     snippet: book.searchInfo.textSnippet,
                   }),
                   ...(book.volumeInfo.imageLinks && {

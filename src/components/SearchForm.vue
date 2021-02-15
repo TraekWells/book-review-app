@@ -37,9 +37,15 @@ export default {
         .then((response) => {
           response.data.items.forEach((book) => {
             let bookObject = {
-              author: book.volumeInfo.authors[0],
-              title: book.volumeInfo.title,
-              description: book.volumeInfo.description,
+              ...(book.volumeInfo.authors && {
+                author: book.volumeInfo.authors[0],
+              }),
+              ...(book.volumeInfo.title && {
+                title: book.volumeInfo.title,
+              }),
+              ...(book.volumeInfo.description && {
+                description: book.volumeInfo.description,
+              }),
               ...(book.searchInfo && {
                 snippet: book.searchInfo.textSnippet,
               }),

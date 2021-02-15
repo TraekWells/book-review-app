@@ -31,7 +31,7 @@
               v-else
               @click="removeBookFromLibrary"
               class="py-4 px-7 rounded-md transition-colors bg-gray-600 hover:bg-gray-900 text-white mr-6 cursor-pointer"
-              >Book was read!</a
+              >You've Read It!</a
             >
             <a
               v-if="!savedForLater"
@@ -43,7 +43,7 @@
               v-else
               @click="removeBookFromSavedBooks"
               class="py-4 px-7 rounded-md transition-colors border hover:border-transparent hover:bg-gray-900 hover:text-white border-gray-600 cursor-pointer"
-              >Remove From Saved Books</a
+              >Book is Saved!</a
             >
           </div>
         </div>
@@ -113,6 +113,11 @@ export default {
       savedForLater: null,
       reviewOpen: false,
       review: null,
+    };
+  },
+  metaInfo() {
+    return {
+      title: `The Bookshelf | ${this.info.title}`,
     };
   },
   methods: {

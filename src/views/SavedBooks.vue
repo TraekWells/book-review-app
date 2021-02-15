@@ -4,10 +4,7 @@
       <div class="container flex flex-col items-center">
         <h1 class="text-5xl mb-5">Saved Books</h1>
         <p class="text-xl max-w-2xl leading-relaxed mb-10 text-center">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque
-          temporibus iste ut a facere, voluptatem dolorum, repudiandae maxime
-          doloremque non, fuga nobis error blanditiis omnis impedit hic porro
-          neque sunt.
+          A list of books that you've saved for later.
         </p>
       </div>
     </header>
@@ -37,6 +34,9 @@ export default {
       savedBooks: [],
       loading: true,
     };
+  },
+  metaInfo: {
+    titleTemplate: "%s | Saved Books",
   },
   mounted() {
     let currentUser = projectAuth.currentUser.uid;

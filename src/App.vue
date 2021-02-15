@@ -15,6 +15,9 @@ export default {
     Navbar,
     Footer,
   },
+  metaInfo: {
+    title: "The Bookshelf",
+  },
 };
 </script>
 

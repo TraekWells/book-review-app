@@ -16,6 +16,7 @@
     </header>
     <main>
       <div class="container px-7 md:px-20">
+        <Loading v-if="loading" />
         <div v-if="searchResults" class="search-results">
           <h2>Search Results</h2>
           <div class="grid grid-cols-1 xl:grid-cols-2 gap-12">
@@ -32,21 +33,29 @@
 <script>
 import SearchForm from "@/components/SearchForm";
 import BookCard from "@/components/BookCard";
+import Loading from "@/components/Loading";
 
 export default {
   name: "Home",
   components: {
     SearchForm,
     BookCard,
+    Loading,
   },
   data() {
     return {
       searchResults: null,
+      loading: false,
     };
+  },
+  metaInfo: {
+    titleTemplate: "%s | Search",
   },
   methods: {
     sendResults(payload) {
+      this.loading = true;
       this.searchResults = payload;
+      this.loading = false;
     },
   },
 };

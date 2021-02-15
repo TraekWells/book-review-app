@@ -3,17 +3,25 @@
     <div
       class="container mx-auto flex items-center justify-center md:justify-between flex-wrap"
     >
-      <ul class="flex text-gray-700 mb-5 md:mb-0">
-        <li>
-          <router-link :to="{ name: 'Home' }" class="p-4">Home</router-link>
+      <ul class="flex text-gray-700 mb-5 md:mb-0 items-center">
+        <li class="mr-3">
+          <router-link
+            :to="{ name: 'Home' }"
+            class="p-3 font-black text-2xl font-serif transition-colors"
+            >TheBookShelf</router-link
+          >
         </li>
-        <li>
-          <router-link :to="{ name: 'Library' }" class="p-4"
+        <li class="mr-3">
+          <router-link
+            :to="{ name: 'Library' }"
+            class="p-3 hover:bg-gray-700 hover:text-white rounded-md transition-colors"
             >My Library</router-link
           >
         </li>
-        <li>
-          <router-link :to="{ name: 'SavedBooks' }" class="p-4"
+        <li class="mr-3">
+          <router-link
+            :to="{ name: 'SavedBooks' }"
+            class="p-3 hover:bg-gray-700 hover:text-white rounded-md transition-colors"
             >Saved Books</router-link
           >
         </li>
@@ -35,6 +43,9 @@
           <router-link :to="{ name: 'SignIn' }" class="p-4"
             >Sign In</router-link
           >
+        </li>
+        <li v-if="user" class="mr-10">
+          <p>Welcome back {{ user.email }}</p>
         </li>
         <li v-if="user">
           <a @click="logOut" class="p-4 cursor-pointer">Log Out</a>

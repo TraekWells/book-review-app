@@ -18,7 +18,7 @@ A good friend of mine reads quite a bit of books and he was looking for a way to
 - [ ] Think of a more interesting layout
 - [ ] Allow the user to scan the barcode to search
 - [ ] Sanitize HTML
-- [ ] Make Responsive
+- [x] Make Responsive
 - [x] Set up route guarding
 - [ ] Add a "Load More" button
 - [x] Only allow a user to add a review if they've read a book

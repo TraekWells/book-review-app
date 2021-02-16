@@ -9,13 +9,13 @@
           target="_blank"
           >Traek Wells</a
         >
-        with Vue 🐜.
+        with Vue.
         <a
           class="text-blue-600 underline"
           href="https://github.com/TraekWells/book-review-app"
           target="_blank"
           >Source Code</a
-        >.
+        >. 🐜
       </p>
     </div>
   </footer>

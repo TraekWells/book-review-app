@@ -106,6 +106,7 @@ export default {
             });
         });
       });
+    console.log("%c🐜", "font-size: 50px");
   },
 };
 </script>

@@ -1,16 +1,25 @@
 <template>
-  <nav class="py-7 shadow-md">
-    <div
-      class="container mx-auto flex items-center justify-center md:justify-between flex-wrap"
+  <nav class="py-7 px-3 shadow-md flex items-center justify-between">
+    <router-link
+      :to="{ name: 'Home' }"
+      class="p-3 z-20 font-black text-gray-700 text-2xl font-serif transition-colors"
+      >TheBookShelf</router-link
     >
-      <ul class="flex text-gray-700 mb-5 md:mb-0 items-center">
-        <li class="mr-3">
-          <router-link
-            :to="{ name: 'Home' }"
-            class="p-3 font-black text-2xl font-serif transition-colors"
-            >TheBookShelf</router-link
-          >
-        </li>
+    <div class="z-20">
+      <a
+        ref="menuButton"
+        @click="toggleMobileMenu"
+        class="text-gray-700 md:hidden cursor-pointer py-3 px-4 border-gray-700 hover:text-white hover:border-transparent hover:bg-gray-700 transition-colors border bw rounded-md"
+        >Menu</a
+      >
+    </div>
+    <div
+      ref="menu"
+      class="hidden container mx-auto md:flex items-center md:justify-between flex-wrap"
+    >
+      <ul
+        class="flex flex-col md:flex-row text-gray-700 mb-5 md:mb-0 items-center"
+      >
         <li class="mr-3">
           <router-link
             :to="{ name: 'Library' }"
@@ -28,12 +37,14 @@
         <li>
           <router-link
             :to="{ name: 'Search' }"
-            class="text-gray-700 py-3 px-4 border-gray-700 hover:text-white hover:border-transparent hover:bg-gray-700 transition-colors border bw rounded-md"
+            class="text-gray-700 block py-3 px-4 border-gray-700 hover:text-white hover:border-transparent hover:bg-gray-700 transition-colors border bw rounded-md"
             >Search for Books</router-link
           >
         </li>
       </ul>
-      <ul class="flex text-gray-700 mb-5 md:mb-0">
+      <ul
+        class="flex flex-col md:flex-row text-gray-700 mb-5 md:mb-0 items-center"
+      >
         <li v-if="!user">
           <router-link :to="{ name: 'SignUp' }" class="p-4"
             >Sign Up</router-link
@@ -62,6 +73,7 @@ export default {
   data() {
     return {
       user: null,
+      menuIsOpen: false,
     };
   },
   methods: {
@@ -69,6 +81,40 @@ export default {
       projectAuth.signOut().then(() => {
         this.$router.push({ name: "SignIn" });
       });
+    },
+    openMobileNav() {
+      if (!this.menuIsOpen) {
+        this.$refs.menuButton.textContent = "Close";
+        this.$refs.menu.classList.remove("hidden");
+        this.$refs.menu.classList.add("open");
+
+        this.menuIsOpen = !this.menuIsOpen;
+      } else {
+        return;
+      }
+    },
+    closeMobileNav() {
+      if (this.menuIsOpen) {
+        this.$refs.menuButton.textContent = "Menu";
+        this.$refs.menu.classList.add("hidden");
+        this.$refs.menu.classList.remove("open");
+
+        this.menuIsOpen = !this.menuIsOpen;
+      } else {
+        return;
+      }
+    },
+    toggleMobileMenu() {
+      if (this.menuIsOpen) {
+        this.closeMobileNav();
+      } else {
+        this.openMobileNav();
+      }
+    },
+  },
+  watch: {
+    $route() {
+      this.closeMobileNav();
     },
   },
   created() {
@@ -83,4 +129,25 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.open {
+  background-color: white;
+  position: fixed;
+  padding: 10rem 3rem 3rem;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  width: 1000%;
+}
+
+.open ul {
+  margin-bottom: 4rem;
+}
+
+.open li {
+  margin-right: 0;
+  margin-bottom: 2.5rem;
+}
+</style>

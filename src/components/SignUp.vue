@@ -6,7 +6,7 @@
         class="bg-white p-10 rounded-md shadow-md lg:w-1/2 mx-auto"
       >
         <h1 class="text-center mb-8 font-serif text-gray-700">Sign Up</h1>
-        <div class="form-field flex flex-col mb-4">
+        <div class="form-field flex flex-col mb-8">
           <label for="email" class="mb-3">Email Address</label>
           <input
             type="text"
@@ -19,7 +19,7 @@
             {{ emailFeedback }}
           </p>
         </div>
-        <div class="form-field flex flex-col mb-4">
+        <div class="form-field flex flex-col mb-8">
           <label for="password" class="mb-3">Password</label>
           <input
             type="password"
@@ -32,7 +32,7 @@
             {{ passwordFeedback }}
           </p>
         </div>
-        <div class="form-field flex flex-col mb-4">
+        <div class="form-field flex flex-col mb-8">
           <label for="password" class="mb-3">Confirm Password</label>
           <input
             type="password"
@@ -42,9 +42,9 @@
             v-model="confirmPassword"
           />
         </div>
-        <h3 class="text-xl my-4">Favorite Genres</h3>
+        <h3 class="text-xl my-4">Favorite Book Genres</h3>
         <div
-          class="favorite-genres grid grid-cols-2 md:grid-cols-3 gap-4 text-center mb-4"
+          class="favorite-genres grid grid-cols-2 md:grid-cols-3 gap-4 text-center mb-8"
         >
           <div class="form-field custom-checkbox mb-4">
             <input

@@ -51,13 +51,16 @@
     </header>
     <main class="px-10 py-0 md:py-12">
       <div class="container flex flex-col md:flex-row">
-        <article class="description md:mr-14">
+        <article class="description md:mr-14 md:w-1/2">
           <h2>Description</h2>
           <p class="text-lg leading-relaxed mb-10">
             {{ info.description }}
           </p>
         </article>
-        <article v-if="markedAsRead" class="review bg-gray-100 p-6 rounded-md">
+        <article
+          v-if="markedAsRead"
+          class="review bg-gray-100 p-6 rounded-md md:w-1/2"
+        >
           <h2>My Review</h2>
           <template v-if="!info.review">
             <a

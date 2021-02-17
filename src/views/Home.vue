@@ -2,10 +2,10 @@
   <div>
     <header class="bg-gray-800 text-white mb-20 px-6 md:px-0 py-16 relative">
       <div class="container sm:flex flex-col items-center">
-        <h1 class="text-5xl mb-5">Bookshelf</h1>
+        <h1 class="text-5xl mb-5">Welcome</h1>
         <p class="text-xl max-w-2xl leading-relaxed mb-10 md:text-center">
-          A place to discover new books, review the books you've read and keep a
-          running list of books you want to read later.
+          The Book Shelf is a place to discover new books, review the books
+          you've read and keep a running list of books you want to read later.
         </p>
         <SearchForm @books="sendResults" class="md:absolute md:-bottom-7" />
       </div>

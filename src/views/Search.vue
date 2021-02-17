@@ -5,10 +5,8 @@
         <div class="max-w-2xl text-center flex flex-col items-center">
           <h1 class="text-5xl mb-5">Search</h1>
           <p class="text-xl leading-relaxed mb-10">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque
-            temporibus iste ut a facere, voluptatem dolorum, repudiandae maxime
-            doloremque non, fuga nobis error blanditiis omnis impedit hic porro
-            neque sunt.
+            Search for a book by typing in the author name, book title or
+            category.
           </p>
           <SearchForm @books="sendResults" />
         </div>

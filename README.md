@@ -1,4 +1,4 @@
-# Book Review App
+# The Bookshelf
 
 A good friend of mine reads quite a bit of books and he was looking for a way to search for, and review the books he's read. It was a good opportunity to try out Tailwind CSS for the first time along with using VueJS to build something.
 

@@ -7,8 +7,14 @@
   >
     <BookmarkIcon
       @click="saveBookForLater"
-      class="favorite-icon absolute top-5 right-5 w-5 cursor-pointer transition-colors hover:text-blue-700"
+      class="absolute top-5 right-5 w-6 cursor-pointer transition-colors text-gray-700 hover:fill-current"
     />
+    <div
+      ref="alert"
+      class="saved opacity-0 text-sm bg-gray-700 text-white rounded-md text-center inline-block py-2 px-4 absolute right-3 -top-7 transition-all"
+    >
+      <p>Saved!</p>
+    </div>
     <img
       v-if="book.image"
       :src="book.image"
@@ -91,6 +97,12 @@ export default {
           savedBooks: firebase.firestore.FieldValue.arrayUnion(saveBook),
         })
         .then(console.log("It worked"));
+
+      this.$refs.alert.classList.add("opacity-100");
+
+      setTimeout(() => {
+        this.$refs.alert.classList.remove("opacity-100");
+      }, 1000);
     },
   },
   created() {

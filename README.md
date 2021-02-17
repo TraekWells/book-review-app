@@ -13,7 +13,7 @@ A good friend of mine reads quite a bit of books and he was looking for a way to
 
 ## Todos
 
-- [ ] Clicking on an icon will favorite the book and save to the database
+- [x] Clicking on an icon will favorite the book and save to the database
 - [ ] Refactor form validation
 - [ ] Think of a more interesting layout
 - [ ] Allow the user to scan the barcode to search
@@ -23,3 +23,4 @@ A good friend of mine reads quite a bit of books and he was looking for a way to
 - [ ] Add a "Load More" button
 - [x] Only allow a user to add a review if they've read a book
 - [ ] Allow the user to change their favorite genres
+- [ ] Clicking the bookmark will fill in the icon so the user knows it's saved. Clicking on it again will remove it from being saved.

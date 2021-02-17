@@ -1,11 +1,11 @@
 <template>
-  <article class="sign-up bg-gray-100 py-12">
-    <div class="container">
+  <article class="sign-up bg-gray-50 py-12">
+    <div class="container px-10">
       <form
         @submit.prevent="signUp"
-        class="bg-white p-10 rounded-md shadow-md w-1/3 mx-auto"
+        class="bg-white p-10 rounded-md shadow-md lg:w-1/2 mx-auto"
       >
-        <h1 class="text-center mb-8">Sign Up</h1>
+        <h1 class="text-center mb-8 font-serif text-gray-700">Sign Up</h1>
         <div class="form-field flex flex-col mb-4">
           <label for="email" class="mb-3">Email Address</label>
           <input
@@ -43,7 +43,9 @@
           />
         </div>
         <h3 class="text-xl my-4">Favorite Genres</h3>
-        <div class="favorite-genres grid grid-cols-3 gap-4 text-center mb-4">
+        <div
+          class="favorite-genres grid grid-cols-2 md:grid-cols-3 gap-4 text-center mb-4"
+        >
           <div class="form-field custom-checkbox mb-4">
             <input
               type="checkbox"
@@ -119,16 +121,16 @@
           <div class="form-field custom-checkbox mb-4">
             <input
               type="checkbox"
-              id="romance"
-              value="romance"
+              id="non-fiction"
+              value="non-fiction"
               v-model="genres"
             />
-            <label for="romance">Romance</label>
+            <label for="romance">Non Fiction</label>
           </div>
           <div class="form-field custom-checkbox mb-4">
             <input
               type="checkbox"
-              id="Suspense"
+              id="suspense"
               value="suspense"
               v-model="genres"
             />
@@ -144,13 +146,19 @@
             <label for="thriller">Thriller</label>
           </div>
         </div>
-        <button class="border border-gray-200 p-3 w-full rounded-md">
+        <button
+          class="p-3 w-full rounded-md text-white bg-gray-700 transition-colors hover:bg-gray-800"
+        >
           Sign Up
         </button>
       </form>
       <p class="text-center mt-8">
         Already have an account?
-        <router-link :to="{ name: 'SignIn' }">Sign in</router-link>
+        <router-link
+          :to="{ name: 'SignIn' }"
+          class="text-blue-600 underline hover:text-blue-900 transition-colors"
+          >Sign in</router-link
+        >
       </p>
     </div>
   </article>

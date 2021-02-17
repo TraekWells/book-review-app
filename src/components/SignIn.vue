@@ -1,12 +1,14 @@
 <template>
-  <article class="sign-in bg-gray-100 py-12">
-    <div class="container">
+  <article class="sign-in bg-gray-50 py-12 h-screen">
+    <div class="container px-10">
       <form
         @submit.prevent="signIn"
-        class="bg-white p-10 rounded-md shadow-md w-1/3 mx-auto"
+        class="bg-white p-10 rounded-md shadow-md md:w-1/2 mx-auto"
       >
-        <h1 class="text-center mb-8">Sign In</h1>
-        <div class="form-field flex flex-col mb-4">
+        <h1 class="text-center mb-8 font-serif text-gray-700">
+          Sign In
+        </h1>
+        <div class="form-field flex flex-col mb-8">
           <label for="email" class="mb-3">Email Address</label>
           <input
             type="text"
@@ -16,7 +18,7 @@
             v-model="email"
           />
         </div>
-        <div class="form-field flex flex-col mb-4">
+        <div class="form-field flex flex-col mb-8">
           <label for="password" class="mb-3">Password</label>
           <input
             type="password"
@@ -27,13 +29,19 @@
           />
         </div>
         <p class="text-red-700 text-center">{{ feedback }}</p>
-        <button class="border border-gray-200 p-3 w-full rounded-md">
+        <button
+          class="p-3 w-full rounded-md text-white bg-gray-700 transition-colors hover:bg-gray-800"
+        >
           Sign In
         </button>
       </form>
       <p class="text-center mt-8">
         Don't have an account?
-        <router-link :to="{ name: 'SignUp' }">Sign up</router-link>
+        <router-link
+          :to="{ name: 'SignUp' }"
+          class="text-blue-600 underline hover:text-blue-900 transition-colors"
+          >Sign up</router-link
+        >
       </p>
     </div>
   </article>

@@ -2,7 +2,7 @@
   <article
     class="bg-gray-50 rounded-md p-7 md:flex relative"
     data-aos="fade-up"
-    data-aos-offset="150"
+    data-aos-offset="100"
     data-aos-delay="100"
   >
     <BookmarkIcon

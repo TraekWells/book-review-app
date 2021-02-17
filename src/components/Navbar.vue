@@ -1,5 +1,5 @@
 <template>
-  <nav class="py-7 px-3 shadow-md">
+  <nav class="py-3 px-3 shadow-md">
     <div class="container flex items-center justify-between">
       <router-link
         :to="{ name: 'Home' }"

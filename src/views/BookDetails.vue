@@ -17,7 +17,7 @@
             {{ info.title }}
           </h1>
           <p v-if="info.snippet" class="flex-grow text-md mb-10">
-            {{ info.snippet }}
+            {{ cleanSnippet }}
           </p>
 
           <div class="buttons flex flex-col md:flex-row">
@@ -113,6 +113,7 @@ export default {
       savedForLater: null,
       reviewOpen: false,
       review: null,
+      cleanSnippet: null,
     };
   },
   metaInfo() {
@@ -173,6 +174,8 @@ export default {
     },
   },
   mounted() {
+    this.cleanSnippet = this.info.snippet.replace(/(<([^>]+)>)/gi, "");
+
     // Check if the book is the user's 'savedBooks' array
     projectFirestore
       .collection("users")
